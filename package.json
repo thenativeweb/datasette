@@ -6,7 +6,7 @@
   "main": "lib/datasette.js",
   "private": true,
   "dependencies": {
-    "eventemitter": "0.4.12",
+    "eventemitter2": "0.4.12",
     "underscore": "1.4.4"
   },
   "devDependencies": {
