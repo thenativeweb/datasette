@@ -55,15 +55,19 @@ var value = cc.get('foo');
 
 Every time a value is created, changed or deleted, the data container will emit a `changed` event. Use the `on` or `once` functions to subscribe to this event.
 
+```javascript
 cc.on('changed', function (key, value) {
   // ...
 });
+```
 
 If you are only interested in `changed` events for a specific `key`, subscribe to the `changed::*` event instead.
 
+```javascript
 cc.on('changed::foo', function (value) {
   // ...
 });
+```
 
 *Note: If you set the same key value pair two times, the data container will not emit an event on the second `set` call.*
 
@@ -73,7 +77,9 @@ To unsubscribe from event notifications, use the `off` function.
 
 If you don't want a `set` call to result in an emitted event, you can specify an `options` object and set its `silent` property to `true`.
 
+```javascript
 cc.set('foo', 'bar', { silent: true });
+```
 
 ## Running the tests
 
