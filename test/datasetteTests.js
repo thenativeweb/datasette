@@ -92,13 +92,12 @@ suite('datasette', function () {
 
     test('does not emit a changed event if the value has not been changed.', function (done) {
       datasette.create(function (err, cc) {
-        var input = { bar: 'baz' },
-            changedCounter = 0;
-        cc.set('foo', input);
+        var changedCounter = 0;
+        cc.set('foo', { bar: 'baz' });
         cc.once('changed', function () {
           changedCounter++;
         });
-        cc.set('foo', input);
+        cc.set('foo', { bar: 'baz' });
         setTimeout(function () {
           assert.that(changedCounter, is.equalTo(0));
           done();
@@ -122,13 +121,12 @@ suite('datasette', function () {
 
     test('does not emit a changed::* event if the value has not been changed.', function (done) {
       datasette.create(function (err, cc) {
-        var input = { bar: 'baz' },
-            changedCounter = 0;
-        cc.set('foo', input);
+        var changedCounter = 0;
+        cc.set('foo', { bar: 'baz' });
         cc.once('changed::foo', function () {
           changedCounter++;
         });
-        cc.set('foo', input);
+        cc.set('foo', { bar: 'baz' });
         setTimeout(function () {
           assert.that(changedCounter, is.equalTo(0));
           done();
