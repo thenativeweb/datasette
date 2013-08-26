@@ -17,9 +17,7 @@ var datasette = require('datasette');
 Next, you can create a new data container. For that you need to call the `create` function.
 
 ```javascript
-datasette.create(function (err, cc) {
-  // ...
-});
+var cc = datasette.create();
 ```
 
 ### Setting data
