@@ -27,7 +27,7 @@ suite('datasette', function () {
     test('returns the value for a key that has been set.', cases([
       [ 'foo', 'bar' ],
       [ 'bar', 23 ],
-      [ 'baz', true ],
+      [ 'baz', true ]
     ], function (key, value) {
       var cc = datasette.create();
       cc.set(key, value);
@@ -45,7 +45,7 @@ suite('datasette', function () {
     test('stores the given key and value.', cases([
       [ 'foo', 'bar' ],
       [ 'bar', 23 ],
-      [ 'baz', true ],
+      [ 'baz', true ]
     ], function (key, value) {
       var cc = datasette.create();
       cc.set(key, value);
@@ -66,7 +66,7 @@ suite('datasette', function () {
     test('emits a changed::* event.', cases([
       [ 'foo' ],
       [ 'bar' ],
-      [ 'baz' ],
+      [ 'baz' ]
     ], function (key, done) {
       var cc = datasette.create();
       var value = { bar: 'baz' };
