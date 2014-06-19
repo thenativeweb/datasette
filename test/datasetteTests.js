@@ -39,6 +39,16 @@ suite('datasette', function () {
       cc.set('foo', { bar: 'baz' });
       assert.that(cc.get('foo'), is.not.sameAs(cc.get('foo')));
     });
+
+    test('returns a deep-cloned object.', function () {
+      var cc = datasette.create();
+
+      var foo = [ 'bar' ];
+      cc.set('foo', foo);
+      foo.push('baz');
+
+      assert.that(cc.get('foo'), is.equalTo([ 'bar' ]));
+    });
   });
 
   suite('set', function () {

@@ -17,7 +17,7 @@
   "dependencies": {
     "comparejs": "0.1.1",
     "eventemitter2": "0.4.13",
-    "underscore": "1.6.0"
+    "lodash": "2.4.1"
   },
   "devDependencies": {
     "cases": "0.1.1",
