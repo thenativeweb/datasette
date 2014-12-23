@@ -7,7 +7,7 @@ var datasette = require('../lib/datasette');
 
 suite('datasette', function () {
   suite('create', function () {
-    test('returns a new datasette instance.', function () {
+    test('returns a new datasette instance.', function (done) {
       var cc = datasette.create();
       assert.that(cc.get, is.ofType('function'));
       assert.that(cc.set, is.ofType('function'));
@@ -15,32 +15,36 @@ suite('datasette', function () {
       assert.that(cc.on, is.ofType('function'));
       assert.that(cc.once, is.ofType('function'));
       assert.that(cc.off, is.ofType('function'));
+      done();
     });
   });
 
   suite('get', function () {
-    test('returns undefined for a key that has not been set.', function () {
+    test('returns undefined for a key that has not been set.', function (done) {
       var cc = datasette.create();
       assert.that(cc.get('foo'), is.undefined());
+      done();
     });
 
     test('returns the value for a key that has been set.', cases([
       [ 'foo', 'bar' ],
       [ 'bar', 23 ],
       [ 'baz', true ]
-    ], function (key, value) {
+    ], function (key, value, done) {
       var cc = datasette.create();
       cc.set(key, value);
       assert.that(cc.get(key), is.equalTo(value));
+      done();
     }));
 
-    test('returns a new reference each time.', function () {
+    test('returns a new reference each time.', function (done) {
       var cc = datasette.create();
       cc.set('foo', { bar: 'baz' });
       assert.that(cc.get('foo'), is.not.sameAs(cc.get('foo')));
+      done();
     });
 
-    test('returns a deep-cloned object.', function () {
+    test('returns a deep-cloned object.', function (done) {
       var cc = datasette.create();
 
       var foo = [ 'bar' ];
@@ -48,6 +52,7 @@ suite('datasette', function () {
       foo.push('baz');
 
       assert.that(cc.get('foo'), is.equalTo([ 'bar' ]));
+      done();
     });
   });
 
@@ -56,10 +61,11 @@ suite('datasette', function () {
       [ 'foo', 'bar' ],
       [ 'bar', 23 ],
       [ 'baz', true ]
-    ], function (key, value) {
+    ], function (key, value, done) {
       var cc = datasette.create();
       cc.set(key, value);
       assert.that(cc.get(key), is.equalTo(value));
+      done();
     }));
 
     test('emits a changed event.', function (done) {
@@ -162,21 +168,23 @@ suite('datasette', function () {
       cc.set('foo', input);
     });
 
-    test('updates a key that had been set before.', function () {
+    test('updates a key that had been set before.', function (done) {
       var cc = datasette.create();
       cc.set('foo', 'bar');
       cc.set('foo', 'baz');
       assert.that(cc.get('foo'), is.equalTo('baz'));
+      done();
     });
 
-    test('removes a key when value is missing.', function () {
+    test('removes a key when value is missing.', function (done) {
       var cc = datasette.create();
       cc.set('foo', 'bar');
       cc.set('foo');
       assert.that(cc.get('foo'), is.undefined());
+      done();
     });
 
-    test('sets multiple key value pairs at once.', function () {
+    test('sets multiple key value pairs at once.', function (done) {
       var cc = datasette.create();
       cc.set({
         foo: 'bar',
@@ -184,6 +192,7 @@ suite('datasette', function () {
       });
       assert.that(cc.get('foo'), is.equalTo('bar'));
       assert.that(cc.get('baz'), is.equalTo('bat'));
+      done();
     });
   });
 });
