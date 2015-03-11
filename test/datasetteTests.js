@@ -1,6 +1,6 @@
 'use strict';
 
-var assert = require('node-assertthat'),
+var assert = require('assertthat'),
     cases = require('cases');
 
 var datasette = require('../lib/datasette');
@@ -9,12 +9,12 @@ suite('datasette', function () {
   suite('create', function () {
     test('returns a new datasette instance.', function (done) {
       var cc = datasette.create();
-      assert.that(cc.get, is.ofType('function'));
-      assert.that(cc.set, is.ofType('function'));
-      assert.that(cc.emit, is.ofType('function'));
-      assert.that(cc.on, is.ofType('function'));
-      assert.that(cc.once, is.ofType('function'));
-      assert.that(cc.off, is.ofType('function'));
+      assert.that(cc.get).is.ofType('function');
+      assert.that(cc.set).is.ofType('function');
+      assert.that(cc.emit).is.ofType('function');
+      assert.that(cc.on).is.ofType('function');
+      assert.that(cc.once).is.ofType('function');
+      assert.that(cc.off).is.ofType('function');
       done();
     });
   });
@@ -22,7 +22,7 @@ suite('datasette', function () {
   suite('get', function () {
     test('returns undefined for a key that has not been set.', function (done) {
       var cc = datasette.create();
-      assert.that(cc.get('foo'), is.undefined());
+      assert.that(cc.get('foo')).is.undefined();
       done();
     });
 
@@ -33,14 +33,14 @@ suite('datasette', function () {
     ], function (key, value, done) {
       var cc = datasette.create();
       cc.set(key, value);
-      assert.that(cc.get(key), is.equalTo(value));
+      assert.that(cc.get(key)).is.equalTo(value);
       done();
     }));
 
     test('returns a new reference each time.', function (done) {
       var cc = datasette.create();
       cc.set('foo', { bar: 'baz' });
-      assert.that(cc.get('foo'), is.not.sameAs(cc.get('foo')));
+      assert.that(cc.get('foo')).is.not.sameAs(cc.get('foo'));
       done();
     });
 
@@ -51,7 +51,7 @@ suite('datasette', function () {
       cc.set('foo', foo);
       foo.push('baz');
 
-      assert.that(cc.get('foo'), is.equalTo([ 'bar' ]));
+      assert.that(cc.get('foo')).is.equalTo([ 'bar' ]);
       done();
     });
   });
@@ -64,7 +64,7 @@ suite('datasette', function () {
     ], function (key, value, done) {
       var cc = datasette.create();
       cc.set(key, value);
-      assert.that(cc.get(key), is.equalTo(value));
+      assert.that(cc.get(key)).is.equalTo(value);
       done();
     }));
 
@@ -72,8 +72,8 @@ suite('datasette', function () {
       var cc = datasette.create();
       var input = { bar: 'baz' };
       cc.once('changed', function (key, value) {
-        assert.that(key, is.equalTo('foo'));
-        assert.that(value, is.equalTo(input));
+        assert.that(key).is.equalTo('foo');
+        assert.that(value).is.equalTo(input);
         done();
       });
       cc.set('foo', input);
@@ -87,7 +87,7 @@ suite('datasette', function () {
       var cc = datasette.create();
       var value = { bar: 'baz' };
       cc.once('changed::' + key, function (actual) {
-        assert.that(actual, is.equalTo(value));
+        assert.that(actual).is.equalTo(value);
         done();
       });
       cc.set(key, value);
@@ -102,7 +102,7 @@ suite('datasette', function () {
       });
       cc.set('foo', { bar: 'baz' });
       setTimeout(function () {
-        assert.that(changedCounter, is.equalTo(0));
+        assert.that(changedCounter).is.equalTo(0);
         done();
       }, 25);
     });
@@ -115,7 +115,7 @@ suite('datasette', function () {
       });
       cc.set('foo', 'bar', { silent: true });
       setTimeout(function () {
-        assert.that(changedCounter, is.equalTo(0));
+        assert.that(changedCounter).is.equalTo(0);
         done();
       }, 25);
     });
@@ -129,7 +129,7 @@ suite('datasette', function () {
       });
       cc.set('foo', { bar: 'baz' });
       setTimeout(function () {
-        assert.that(changedCounter, is.equalTo(0));
+        assert.that(changedCounter).is.equalTo(0);
         done();
       }, 25);
     });
@@ -143,7 +143,7 @@ suite('datasette', function () {
       });
       cc.set('foo', { bar: 'baz' }, { silent: true });
       setTimeout(function () {
-        assert.that(changedCounter, is.equalTo(0));
+        assert.that(changedCounter).is.equalTo(0);
         done();
       }, 25);
     });
@@ -152,7 +152,7 @@ suite('datasette', function () {
       var cc = datasette.create();
       var input = { bar: 'baz' };
       cc.once('changed', function (key, value) {
-        assert.that(value, is.not.sameAs(input));
+        assert.that(value).is.not.sameAs(input);
         done();
       });
       cc.set('foo', input);
@@ -162,7 +162,7 @@ suite('datasette', function () {
       var cc = datasette.create();
       var input = { bar: 'baz' };
       cc.once('changed::foo', function (value) {
-        assert.that(value, is.not.sameAs(input));
+        assert.that(value).is.not.sameAs(input);
         done();
       });
       cc.set('foo', input);
@@ -172,7 +172,7 @@ suite('datasette', function () {
       var cc = datasette.create();
       cc.set('foo', 'bar');
       cc.set('foo', 'baz');
-      assert.that(cc.get('foo'), is.equalTo('baz'));
+      assert.that(cc.get('foo')).is.equalTo('baz');
       done();
     });
 
@@ -180,7 +180,7 @@ suite('datasette', function () {
       var cc = datasette.create();
       cc.set('foo', 'bar');
       cc.set('foo');
-      assert.that(cc.get('foo'), is.undefined());
+      assert.that(cc.get('foo')).is.undefined();
       done();
     });
 
@@ -190,8 +190,8 @@ suite('datasette', function () {
         foo: 'bar',
         baz: 'bat'
       });
-      assert.that(cc.get('foo'), is.equalTo('bar'));
-      assert.that(cc.get('baz'), is.equalTo('bat'));
+      assert.that(cc.get('foo')).is.equalTo('bar');
+      assert.that(cc.get('baz')).is.equalTo('bat');
       done();
     });
   });
