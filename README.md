@@ -2,8 +2,6 @@
 
 datasette is a key-value container for arbitrary data.
 
-[![Circle CI](https://circleci.com/gh/thenativeweb/datasette.svg?style=svg)](https://circleci.com/gh/thenativeweb/datasette)
-
 ## Installation
 
     $ npm install thenativeweb/datasette
