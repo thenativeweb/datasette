@@ -13,17 +13,16 @@
     }
   ],
   "main": "lib/datasette.js",
-  "private": true,
   "dependencies": {
     "comparejs": "0.1.2",
-    "eventemitter2": "0.4.14",
-    "lodash": "3.5.0"
+    "eventemitter2": "1.0.0",
+    "lodash": "4.6.1"
   },
   "devDependencies": {
-    "assertthat": "0.5.3",
+    "assertthat": "0.6.0",
     "cases": "0.1.1",
-    "grunt": "0.4.5",
-    "tourism": "0.15.0"
+    "gulp": "3.9.1",
+    "roboter": "0.4.8"
   },
   "repository": {
     "type": "git",

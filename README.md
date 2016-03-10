@@ -4,20 +4,22 @@ datasette is a key-value container for arbitrary data.
 
 ## Installation
 
-    $ npm install thenativeweb/datasette
+```bash
+$ npm install datasette
+```
 
 ## Quick start
 
 The first thing you need to do is to integrate datasette into your application. For that add a reference to the `datasette` module.
 
 ```javascript
-var datasette = require('datasette');
+const datasette = require('datasette');
 ```
 
 Next, you can create a new data container. For that you need to call the `create` function.
 
 ```javascript
-var cc = datasette.create();
+const cc = datasette.create();
 ```
 
 ### Setting data
@@ -81,14 +83,16 @@ cc.set('foo', 'bar', { silent: true });
 
 ## Running the build
 
-This module can be built using [Grunt](http://gruntjs.com/). Besides running the tests, this also analyses the code. To run Grunt, go to the folder where you have installed datasette and run `grunt`. You need to have [grunt-cli](https://github.com/gruntjs/grunt-cli) installed.
+To build this module use [roboter](https://www.npmjs.com/package/roboter).
 
-    $ grunt
+```bash
+$ bot build-server
+```
 
 ## License
 
 The MIT License (MIT)
-Copyright (c) 2013-2015 the native web.
+Copyright (c) 2013-2016 the native web.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
