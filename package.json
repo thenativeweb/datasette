@@ -33,6 +33,9 @@
       [
         "babelify",
         {
+          "plugins": [
+            "transform-es2015-block-scoping"
+          ],
           "presets": [
             "es2015"
           ]
