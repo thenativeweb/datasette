@@ -28,6 +28,18 @@
     "type": "git",
     "url": "git://github.com/thenativeweb/datasette.git"
   },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ]
+    ]
+  },
   "keywords": [
     "configuration",
     "key-value"
