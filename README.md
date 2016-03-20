@@ -56,7 +56,7 @@ var value = cc.get('foo');
 Every time a value is created, changed or deleted, the data container will emit a `changed` event. Use the `on` or `once` functions to subscribe to this event.
 
 ```javascript
-cc.on('changed', function (key, value) {
+cc.on('changed', (key, value) => {
   // ...
 });
 ```
@@ -64,7 +64,7 @@ cc.on('changed', function (key, value) {
 If you are only interested in `changed` events for a specific `key`, subscribe to the `changed::*` event instead.
 
 ```javascript
-cc.on('changed::foo', function (value) {
+cc.on('changed::foo', value => {
   // ...
 });
 ```
