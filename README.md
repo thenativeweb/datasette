@@ -46,7 +46,7 @@ This is equivalent to calling `set` two times with separate key value pairs.
 To get data, call the data container's `get` function and specify the `key` you would like to retrieve.
 
 ```javascript
-var value = cc.get('foo');
+const value = cc.get('foo');
 ```
 
 *Note: Each time you call `get`, you will get a cloned result to avoid conflicting state changes on a shared reference.*
@@ -86,7 +86,7 @@ cc.set('foo', 'bar', { silent: true });
 To build this module use [roboter](https://www.npmjs.com/package/roboter).
 
 ```bash
-$ bot build-server
+$ bot
 ```
 
 ## License
