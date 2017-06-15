@@ -15,14 +15,14 @@
   "main": "dist/datasette.js",
   "dependencies": {
     "comparejs": "0.1.6",
-    "eventemitter2": "3.0.0",
+    "eventemitter2": "4.1.0",
     "lodash": "4.17.4"
   },
   "devDependencies": {
-    "assertthat": "0.8.3",
+    "assertthat": "0.9.0",
     "cases": "0.1.1",
-    "roboter": "0.14.6",
-    "roboter-server": "0.14.6"
+    "roboter": "0.15.2",
+    "roboter-server": "0.15.2"
   },
   "repository": {
     "type": "git",
