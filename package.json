@@ -2,6 +2,10 @@
   "name": "datasette",
   "version": "0.3.4",
   "description": "datasette is a key-value container for arbitrary data.",
+  "scripts": {
+    "build": "uglifyjs dist/datasette.js --compress --mangle -o dist/datasette.min.js",
+    "test": "bot && npm run build"
+  },
   "contributors": [
     {
       "name": "Golo Roden",
@@ -12,17 +16,24 @@
       "email": "matthias.wagler@thenativeweb.io"
     }
   ],
+  "source": "lib/datasette.js",
   "main": "dist/datasette.js",
   "dependencies": {
     "comparejs": "0.1.6",
     "eventemitter2": "4.1.0",
-    "lodash": "4.17.4"
+    "lodash": "^4.17.4"
   },
   "devDependencies": {
-    "assertthat": "0.9.0",
+    "assertthat": "^0.11.0",
     "cases": "0.1.1",
-    "roboter": "0.15.2",
-    "roboter-server": "0.15.2"
+    "eslint-config-es": "^0.8.12",
+    "eslint-plugin-extended": "^0.2.0",
+    "eslint-plugin-mocha": "^4.11.0",
+    "eslint-plugin-react": "^7.6.1",
+    "roboter": "^0.15.4",
+    "roboter-cli": "^0.3.1",
+    "roboter-server": "^0.15.4",
+    "uglify-js": "^3.3.9"
   },
   "repository": {
     "type": "git",
