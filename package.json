@@ -16,7 +16,7 @@
       "email": "jan-hendrik.grundhoefer@thenativeweb.io"
     }
   ],
-  "main": "dist/datasette.js",
+  "main": "dist/Datasette.js",
   "dependencies": {
     "comparejs": "1.0.0",
     "eventemitter2": "5.0.1",
