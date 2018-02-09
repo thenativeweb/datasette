@@ -10,19 +10,23 @@
     {
       "name": "Matthias Wagler",
       "email": "matthias.wagler@thenativeweb.io"
+    },
+    {
+      "name": "Jan-Hendrik Grundhöfer",
+      "email": "jan-hendrik.grundhoefer@thenativeweb.io"
     }
   ],
   "main": "dist/datasette.js",
   "dependencies": {
-    "comparejs": "0.1.6",
-    "eventemitter2": "4.1.0",
-    "lodash": "4.17.4"
+    "comparejs": "1.0.0",
+    "eventemitter2": "5.0.1",
+    "lodash": "4.17.5"
   },
   "devDependencies": {
-    "assertthat": "0.9.0",
-    "cases": "0.1.1",
-    "roboter": "0.15.2",
-    "roboter-server": "0.15.2"
+    "assertthat": "1.0.0",
+    "cases": "1.0.0",
+    "roboter": "0.15.6",
+    "roboter-server": "0.15.6"
   },
   "repository": {
     "type": "git",
