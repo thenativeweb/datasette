@@ -3,28 +3,26 @@
 const assert = require('assertthat'),
       cases = require('cases');
 
-const datasette = require('../../lib/datasette');
+const Datasette = require('../../lib/Datasette');
 
-suite('datasette', () => {
-  suite('create', () => {
-    test('returns a new datasette instance.', done => {
-      const cc = datasette.create();
+suite('Datasette', () => {
+  test('returns a new datasette instance.', done => {
+    const datasette = new Datasette();
 
-      assert.that(cc.get).is.ofType('function');
-      assert.that(cc.set).is.ofType('function');
-      assert.that(cc.emit).is.ofType('function');
-      assert.that(cc.on).is.ofType('function');
-      assert.that(cc.once).is.ofType('function');
-      assert.that(cc.off).is.ofType('function');
-      done();
-    });
+    assert.that(datasette.get).is.ofType('function');
+    assert.that(datasette.set).is.ofType('function');
+    assert.that(datasette.emit).is.ofType('function');
+    assert.that(datasette.on).is.ofType('function');
+    assert.that(datasette.once).is.ofType('function');
+    assert.that(datasette.off).is.ofType('function');
+    done();
   });
 
   suite('get', () => {
     test('returns undefined for a key that has not been set.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
 
-      assert.that(cc.get('foo')).is.undefined();
+      assert.that(datasette.get('foo')).is.undefined();
       done();
     });
 
@@ -33,29 +31,29 @@ suite('datasette', () => {
       [ 'bar', 23 ],
       [ 'baz', true ]
     ], (key, value, done) => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
 
-      cc.set(key, value);
-      assert.that(cc.get(key)).is.equalTo(value);
+      datasette.set(key, value);
+      assert.that(datasette.get(key)).is.equalTo(value);
       done();
     }));
 
     test('returns a new reference each time.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
 
-      cc.set('foo', { bar: 'baz' });
-      assert.that(cc.get('foo')).is.not.sameAs(cc.get('foo'));
+      datasette.set('foo', { bar: 'baz' });
+      assert.that(datasette.get('foo')).is.not.sameAs(datasette.get('foo'));
       done();
     });
 
     test('returns a deep-cloned object.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
       const foo = [ 'bar' ];
 
-      cc.set('foo', foo);
+      datasette.set('foo', foo);
       foo.push('baz');
 
-      assert.that(cc.get('foo')).is.equalTo([ 'bar' ]);
+      assert.that(datasette.get('foo')).is.equalTo([ 'bar' ]);
       done();
     });
   });
@@ -66,23 +64,23 @@ suite('datasette', () => {
       [ 'bar', 23 ],
       [ 'baz', true ]
     ], (key, value, done) => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
 
-      cc.set(key, value);
-      assert.that(cc.get(key)).is.equalTo(value);
+      datasette.set(key, value);
+      assert.that(datasette.get(key)).is.equalTo(value);
       done();
     }));
 
     test('emits a changed event.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
       const input = { bar: 'baz' };
 
-      cc.once('changed', (key, value) => {
+      datasette.once('changed', (key, value) => {
         assert.that(key).is.equalTo('foo');
         assert.that(value).is.equalTo(input);
         done();
       });
-      cc.set('foo', input);
+      datasette.set('foo', input);
     });
 
     test('emits a changed::* event.', cases([
@@ -90,25 +88,25 @@ suite('datasette', () => {
       [ 'bar' ],
       [ 'baz' ]
     ], (key, done) => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
       const value = { bar: 'baz' };
 
-      cc.once(`changed::${key}`, actual => {
+      datasette.once(`changed::${key}`, actual => {
         assert.that(actual).is.equalTo(value);
         done();
       });
-      cc.set(key, value);
+      datasette.set(key, value);
     }));
 
     test('does not emit a changed event if the value has not been changed.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
       let changedCounter = 0;
 
-      cc.set('foo', { bar: 'baz' });
-      cc.once('changed', () => {
+      datasette.set('foo', { bar: 'baz' });
+      datasette.once('changed', () => {
         changedCounter += 1;
       });
-      cc.set('foo', { bar: 'baz' });
+      datasette.set('foo', { bar: 'baz' });
       setTimeout(() => {
         assert.that(changedCounter).is.equalTo(0);
         done();
@@ -116,13 +114,13 @@ suite('datasette', () => {
     });
 
     test('does not emit a changed event if silent is set to true.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
       let changedCounter = 0;
 
-      cc.once('changed', () => {
+      datasette.once('changed', () => {
         changedCounter += 1;
       });
-      cc.set('foo', 'bar', { silent: true });
+      datasette.set('foo', 'bar', { silent: true });
       setTimeout(() => {
         assert.that(changedCounter).is.equalTo(0);
         done();
@@ -130,14 +128,14 @@ suite('datasette', () => {
     });
 
     test('does not emit a changed::* event if the value has not been changed.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
       let changedCounter = 0;
 
-      cc.set('foo', { bar: 'baz' });
-      cc.once('changed::foo', () => {
+      datasette.set('foo', { bar: 'baz' });
+      datasette.once('changed::foo', () => {
         changedCounter += 1;
       });
-      cc.set('foo', { bar: 'baz' });
+      datasette.set('foo', { bar: 'baz' });
       setTimeout(() => {
         assert.that(changedCounter).is.equalTo(0);
         done();
@@ -145,14 +143,14 @@ suite('datasette', () => {
     });
 
     test('does not emit a changed::* event if silent is set to true.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
       let changedCounter = 0;
 
-      cc.set('foo', { bar: 'baz' });
-      cc.once('changed::foo', () => {
+      datasette.set('foo', { bar: 'baz' });
+      datasette.once('changed::foo', () => {
         changedCounter += 1;
       });
-      cc.set('foo', { bar: 'baz' }, { silent: true });
+      datasette.set('foo', { bar: 'baz' }, { silent: true });
       setTimeout(() => {
         assert.that(changedCounter).is.equalTo(0);
         done();
@@ -160,54 +158,54 @@ suite('datasette', () => {
     });
 
     test('hands over a new reference on a changed event.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
       const input = { bar: 'baz' };
 
-      cc.once('changed', (key, value) => {
+      datasette.once('changed', (key, value) => {
         assert.that(value).is.not.sameAs(input);
         done();
       });
-      cc.set('foo', input);
+      datasette.set('foo', input);
     });
 
     test('hands over a new reference on a changed::* event.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
       const input = { bar: 'baz' };
 
-      cc.once('changed::foo', value => {
+      datasette.once('changed::foo', value => {
         assert.that(value).is.not.sameAs(input);
         done();
       });
-      cc.set('foo', input);
+      datasette.set('foo', input);
     });
 
     test('updates a key that had been set before.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
 
-      cc.set('foo', 'bar');
-      cc.set('foo', 'baz');
-      assert.that(cc.get('foo')).is.equalTo('baz');
+      datasette.set('foo', 'bar');
+      datasette.set('foo', 'baz');
+      assert.that(datasette.get('foo')).is.equalTo('baz');
       done();
     });
 
     test('removes a key when value is missing.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
 
-      cc.set('foo', 'bar');
-      cc.set('foo');
-      assert.that(cc.get('foo')).is.undefined();
+      datasette.set('foo', 'bar');
+      datasette.set('foo');
+      assert.that(datasette.get('foo')).is.undefined();
       done();
     });
 
     test('sets multiple key value pairs at once.', done => {
-      const cc = datasette.create();
+      const datasette = new Datasette();
 
-      cc.set({
+      datasette.set({
         foo: 'bar',
         baz: 'bat'
       });
-      assert.that(cc.get('foo')).is.equalTo('bar');
-      assert.that(cc.get('baz')).is.equalTo('bat');
+      assert.that(datasette.get('foo')).is.equalTo('bar');
+      assert.that(datasette.get('baz')).is.equalTo('bat');
       done();
     });
   });

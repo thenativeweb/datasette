@@ -10,30 +10,30 @@ $ npm install datasette
 
 ## Quick start
 
-The first thing you need to do is to integrate datasette into your application. For that add a reference to the `datasette` module.
+The first thing you need to do is to integrate datasette into your application. For that add a reference to the `datasette` module:
 
 ```javascript
-const datasette = require('datasette');
+const Datasette = require('datasette');
 ```
 
-Next, you can create a new data container. For that you need to call the `create` function.
+Next, you can create a new data container:
 
 ```javascript
-const cc = datasette.create();
+const datasette = new Datasette();
 ```
 
 ### Setting data
 
-To set data, call the data container's `set` function and specify the `key` and the `value` you want to store.
+To set data, call the data container's `set` function and specify the `key` and the `value` you want to store:
 
 ```javascript
-cc.set('foo', { bar: 'baz' });
+datasette.set('foo', { bar: 'baz' });
 ```
 
-To set multiple keys and values at once, you can also hand over an object that contains the data.
+To set multiple keys and values at once, you can also hand over an object that contains the data:
 
 ```javascript
-cc.set({
+datasette.set({
   foo: 23,
   bar: 42
 });
@@ -43,28 +43,28 @@ This is equivalent to calling `set` two times with separate key value pairs.
 
 ### Getting data
 
-To get data, call the data container's `get` function and specify the `key` you would like to retrieve.
+To get data, call the data container's `get` function and specify the `key` you would like to retrieve:
 
 ```javascript
-const value = cc.get('foo');
+const value = datasette.get('foo');
 ```
 
 *Note: Each time you call `get`, you will get a cloned result to avoid conflicting state changes on a shared reference.*
 
 ### Dealing with events
 
-Every time a value is created, changed or deleted, the data container will emit a `changed` event. Use the `on` or `once` functions to subscribe to this event.
+Every time a value is created, changed or deleted, the data container will emit a `changed` event. Use the `on` or `once` functions to subscribe to this event:
 
 ```javascript
-cc.on('changed', (key, value) => {
+datasette.on('changed', (key, value) => {
   // ...
 });
 ```
 
-If you are only interested in `changed` events for a specific `key`, subscribe to the `changed::*` event instead.
+If you are only interested in `changed` events for a specific `key`, subscribe to the `changed::*` event instead:
 
 ```javascript
-cc.on('changed::foo', value => {
+datasette.on('changed::foo', value => {
   // ...
 });
 ```
@@ -75,10 +75,10 @@ To unsubscribe from event notifications, use the `off` function.
 
 ### Suppressing events
 
-If you don't want a `set` call to result in an emitted event, you can specify an `options` object and set its `silent` property to `true`.
+If you don't want a `set` call to result in an emitted event, you can specify an `options` object and set its `silent` property to `true`:
 
 ```javascript
-cc.set('foo', 'bar', { silent: true });
+datasette.set('foo', 'bar', { silent: true });
 ```
 
 ## Running the build
