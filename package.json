@@ -1,6 +1,6 @@
 {
   "name": "datasette",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "datasette is a key-value container for arbitrary data.",
   "contributors": [
     {
