@@ -3,7 +3,7 @@
 const assert = require('assertthat'),
       cases = require('cases');
 
-const Datasette = require('../../lib/Datasette');
+const Datasette = require('../../src/Datasette');
 
 suite('Datasette', () => {
   test('returns a new datasette instance.', done => {
