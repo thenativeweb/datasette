@@ -20,7 +20,7 @@
   "dependencies": {
     "comparejs": "1.0.1",
     "eventemitter2": "5.0.1",
-    "lodash": "4.17.11"
+    "lodash": "4.17.21"
   },
   "devDependencies": {
     "assertthat": "2.0.1",
