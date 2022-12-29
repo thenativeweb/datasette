@@ -25,7 +25,7 @@
   "devDependencies": {
     "assertthat": "2.0.1",
     "cases": "1.0.0",
-    "roboter": "3.0.4"
+    "roboter": "13.2.1"
   },
   "repository": {
     "type": "git",
